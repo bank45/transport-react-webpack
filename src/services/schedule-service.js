@@ -1,6 +1,20 @@
 
 export default class ScheduleService {
 
+  async getAllStation() {
+    return (
+     await fetch('/api/allstation')
+        .then(response => {
+          return  response.json()
+        })
+        .then((data) => {
+     //     console.log('Service AllStation: ', data)
+          return  data
+        })
+        .catch(error => console.log(error))
+    )
+  }; 
+
  async getSchedule() {
     return (
      await fetch('/api/schedule'
@@ -20,7 +34,7 @@ export default class ScheduleService {
           return  response.json()
         })
         .then((data) => {
-          console.log('Service: ', data)
+      //    console.log('Service: ', data)
           return  data
         })
         .catch(error => console.log(error))

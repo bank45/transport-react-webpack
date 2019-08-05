@@ -1,3 +1,10 @@
+const allStationLoaded = (allStation) => {
+    return {
+        type: 'ALLSTATION_LOADED',
+        payload: allStation
+    }
+}
+
 const scheduleLoaded = (newFlights) => {
     return {
         type: 'FLIGHTS_LOADED',
@@ -13,6 +20,7 @@ const flightsError = (error) => {
 }
 
 export {
+    allStationLoaded,
     scheduleLoaded,
     flightsError
 }

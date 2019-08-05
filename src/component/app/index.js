@@ -1,14 +1,23 @@
-import React from 'react';
-import FormTop from '../form-top';
+import React, { Component } from 'react';
+import Header from '../header';
+
 import FlightList from '../flight-list';
 
-const App = () => {
-  return (
-    <main role="main"  className="container">
-      <FormTop />
-      <FlightList />
-    </main>
-  );
+class App extends Component {
+
+  componentDidUpdate(){
+    console.log('App componentDidUpdate()...')
+}
+
+  render() {
+    console.log('App render: ...')
+    return (
+      <main role="main" className="container">
+        <Header />
+        <FlightList />
+      </main>
+    );
+  }
 
 };
 

@@ -1,14 +1,20 @@
 
 const initialState = {
-    flights: [],
+    allstation: '',
+    flights: '',
     error: null
 }
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case 'ALLSTATION_LOADED':
+            return {...state,
+                allstation: action.payload,
+                error: null
+            };
         case 'FLIGHTS_LOADED':
-            return {
+            return { ...state,
                 flights: action.payload,
                 error: null
             };
