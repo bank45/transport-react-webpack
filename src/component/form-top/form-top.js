@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 
 class FormTop extends Component {
-    constructor() {
-        super()
-        this.state = {
-            arrival: '',
-            from: 'Moscow'
-        }
-        this.handleChangeArrival = this.handleChangeArrival.bind(this)
-        this.handleChangeFrom = this.handleChangeFrom.bind(this)
-    }
 
-    handleChangeArrival(event) {
+        state = {
+            arrival: '',
+            from: ''
+        }
+
+    handleChangeArrival=(event)=> {
         console.log(event.target.value)
         this.setState({ arrival: event.target.value })
     }
 
-    handleChangeFrom(event) {
+    handleChangeFrom=(event)=> {
      //   console.log(event.target.value)
         this.setState({ from: event.target.value })
     }
@@ -31,7 +27,7 @@ class FormTop extends Component {
                         <div className='col-md-9'>
                             <div className='input-group'>
                                 <div className='input-group-text'><span>Date arrival</span></div>
-                                <input className="form-control " id="start" type="date" name="date-start" value={this.state.arrival} onChange={this.handleChangeArrival}/>
+                                <input className="form-control " id="start" required type="date" name="datestart" value={this.state.arrival} onChange={this.handleChangeArrival}/>
                             </div>
                         </div>
                     </div>
@@ -41,7 +37,7 @@ class FormTop extends Component {
                     </div>
                     <div className="form-group row">
                         <label className="col-md-3 control-label" for="text">Station from</label>
-                        <input className="form-control col-lg-6" id="from" type="text" name="station-from" value={this.state.from} onChange={this.handleChangeFrom} />
+                        <input className="form-control col-lg-6" id="from" required type="text" name="station-from" value={this.state.from} onChange={this.handleChangeFrom} />
                     </div>
                     <div className="form-group row">
                         <label className="col-md-3 control-label" for="text">Station to</label>

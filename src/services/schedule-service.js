@@ -15,20 +15,20 @@ export default class ScheduleService {
     )
   }; 
 
- async getSchedule() {
+ async getSchedule(obj) {
+   console.log('obj: ',obj)
     return (
-     await fetch('/api/schedule'
-        , {
+     await fetch('/api/schedule', {
           method: 'POST',
-          mode: 'no-cors',
-          body: '',
+          mode: 'cors',
           headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:3000',
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Methods': 'POST',
-            'Accept': 'application/json',
+          //   'Access-Control-Allow-Origin': 'http://localhost:3000',
+          //   'Access-Control-Allow-Credentials': 'true',
+          //   'Access-Control-Allow-Methods': 'POST',
+          //   'Accept': 'application/json',
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify(obj),
         })
         .then(response => {
           return  response.json()
