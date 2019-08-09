@@ -8,16 +8,28 @@ import FlightItem from '../flight-list-item';
 
 class FlightList extends Component {
 
-    // async  componentDidMount() {
-    //     const { scheduleService, allStationLoaded, flightsError } = this.props;
-    //     const dataStation = scheduleService.getAllStation();
-
-    //     await dataStation
-    //         .then(res => {
-    //             allStationLoaded(res)
-    //         })
-    //         .catch((err) => flightsError(err));
-    // }
+    async  componentDidMount() {
+        const { scheduleService, allStationLoaded, flightsError } = this.props;
+        const dataStation = scheduleService.getAllStation();
+        const items = {}
+        await dataStation
+            .then(res => {
+                console.log('res: ',res)
+                    
+                res.countries.forEach((country, index) => {
+                    country.regions.forEach((region, num) => {
+                        region.settlements.forEach((settlement) => {
+                            settlement.stations.forEach((station) => {
+                                items[station.codes.yandex_code] = [country.title, region.title, settlement.title, station.title, station.transport_type]
+                            })
+                        })
+                    })
+                })
+                console.log('items: ',items)
+                allStationLoaded(items)
+            })
+            .catch((err) => flightsError(err));
+    }
 
     componentDidUpdate() {
         console.log('FlightList componentDidUpdate()...')
@@ -32,7 +44,7 @@ class FlightList extends Component {
         if (error) {
             return <ErrorIndicator />
         }
-        console.log('FlightList Render: ...',Boolean(flights))
+        console.log('FlightList Render: ...', Boolean(flights))
 
         return (
             <div>
@@ -61,12 +73,12 @@ class FlightList extends Component {
     }
 }
 
-const mapStateToProps = ({ flights, error }) => {
-    return { flights, error }
+const mapStateToProps = ({ allstation, flights, error }) => {
+    return { allstation, flights, error }
 }
 
 const mapDispatchToProps = {
-    
+    allStationLoaded,
     flightsError
 }
 

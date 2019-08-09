@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { allStationLoaded, flightsError, setStation } from '../../actions';
 
 class FormTop extends Component {
 
-        state = {
-            arrival: '',
-            from: ''
-        }
+    state = {
+        arrival: '',
+        from: '',
+        liveFind: [],
+        station: ''
+    }
 
-    handleChangeArrival=(event)=> {
+    handleChangeArrival = (event) => {
         console.log(event.target.value)
         this.setState({ arrival: event.target.value })
     }
 
-    handleChangeFrom=(event)=> {
-     //   console.log(event.target.value)
-        this.setState({ from: event.target.value })
+    findStation = async () => {
+        const { trans_type } = this.props
+        const items = this.props.allstation
+        const str = new RegExp(this.state.from, 'i')
+        const lf = {}
+        if (this.state.from.length > 2) {
+            for (let s in items) {
+                if (str.test(items[s][3]) && items[s][4] === trans_type) {
+                    lf[s] = [items[s][3], items[s][4]]
+                }
+            }
+            await this.setState({
+                liveFind: lf
+            })
+            console.log(this.state.liveFind)
+        }
+        console.log('findStation: ...OK')
+    }
+
+    handleChangeFrom = async (event) => {
+        const { setStation } = this.props
+        //    const allStat = this.props.allstation
+        await this.setState({ from: event.target.value })
+
+        await this.findStation()
+        //  setStation()
     }
     render() {
         console.log('FormTop render: ...')
@@ -27,7 +54,7 @@ class FormTop extends Component {
                         <div className='col-md-9'>
                             <div className='input-group'>
                                 <div className='input-group-text'><span>Date arrival</span></div>
-                                <input className="form-control " id="start" required type="date" name="datestart" value={this.state.arrival} onChange={this.handleChangeArrival}/>
+                                <input className="form-control " id="start" required type="date" name="datestart" value={this.state.arrival} onChange={this.handleChangeArrival} />
                             </div>
                         </div>
                     </div>
@@ -37,7 +64,10 @@ class FormTop extends Component {
                     </div>
                     <div className="form-group row">
                         <label className="col-md-3 control-label" for="text">Station from</label>
-                        <input className="form-control col-lg-6" id="from" required type="text" name="station-from" value={this.state.from} onChange={this.handleChangeFrom} />
+                        <input className="form-control col-lg-6" id="from" type="text" name="station-from" value={this.state.from} onChange={this.handleChangeFrom} />
+                        <option selected>
+
+                        </option>
                     </div>
                     <div className="form-group row">
                         <label className="col-md-3 control-label" for="text">Station to</label>
@@ -52,4 +82,14 @@ class FormTop extends Component {
     }
 }
 
-export default FormTop;
+const mapStateToProps = ({ station, allstation, flights, error }) => {
+    return { station, allstation, flights, error }
+}
+
+const mapDispatchToProps = {
+    allStationLoaded,
+    flightsError,
+    setStation
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormTop);

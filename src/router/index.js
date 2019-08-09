@@ -23,7 +23,7 @@ router.post('/schedule', async function (req, res) {
     console.log('req.body: ',req.body)
     let key = 'f4dd2c3f-2280-4d37-8bb9-fcdb16a54e48'
     let station = 's9600213';
-    let transport_types = req.body.transport_types;
+    let transport_types = req.body.transport_types ;
     let direction = 'arrival';
     let date = req.body.datestart ;
     // Расписание рейсов по станции

@@ -34,7 +34,7 @@ class Header extends Component {
         const newActiveElement = document.querySelector(`#${e.target.id}`)
         newActiveElement.classList.add('active')
         // Поиск станции
-        
+
 
 
     }
@@ -43,7 +43,8 @@ class Header extends Component {
         console.log('onListFlights:..', 'event:', event.target)
         const formData = new FormData(event.target);
         const obj = {
-            transport_types: this.state.transport_types
+            transport_types: this.state.transport_types,
+            
         };
         formData.forEach((value, key) => {
             obj[key] = value
@@ -61,6 +62,7 @@ class Header extends Component {
     }
     render() {
         const { error } = this.props;
+        const{transport_types}=this.state
         console.log('Header Render:..')
         if (error) {
             return <ErrorIndicator />
@@ -90,15 +92,15 @@ class Header extends Component {
                     </ul>
                 </div>
                 <div class="card-body">
-                    <FormTop onListFlights={this.onListFlights} />
+                    <FormTop onListFlights={this.onListFlights} trans_type={transport_types} />
                 </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ flights, error }) => {
-    return { flights, error }
+const mapStateToProps = ({ allstation, flights, error }) => {
+    return { allstation, flights, error }
 }
 
 const mapDispatchToProps = {
