@@ -11,7 +11,7 @@ import FormTop from '../form-top';
 class Header extends Component {
     state = {
         datestart: Date.now(),
-        transport_types: 'plane'
+        transport_types: 'suburban'
     }
     componentDidMount() {
         console.log('Header: > componentDidMount: ', 'Date.now()', Date.now())
@@ -72,7 +72,7 @@ class Header extends Component {
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a id='plane' class="nav-link active" onClick={this.handleClick} href="#">Авиа</a>
+                            <a id='plane' class="nav-link " onClick={this.handleClick} href="#">Авиа</a>
                         </li>
                         <li class="nav-item">
                             <a id='train' class="nav-link " onClick={this.handleClick} href="#">ЖД</a>
@@ -84,7 +84,7 @@ class Header extends Component {
                             <a id='bus' class="nav-link" onClick={this.handleClick} href="#">Автобус</a>
                         </li>
                         <li class="nav-item">
-                            <a id='suburban' class="nav-link" onClick={this.handleClick} href="#">Электричка</a>
+                            <a id='suburban' class="nav-link active" onClick={this.handleClick} href="#">Электричка</a>
                         </li>
                         <li class="nav-item">
                             <a id='helicopter' class="nav-link" onClick={this.handleClick} href="#">Вертолет</a>
