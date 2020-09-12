@@ -64,7 +64,7 @@
     "handlebars": "^4.1.2",
     "jquery": "^3.4.1",
     "morgan": "^1.9.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
